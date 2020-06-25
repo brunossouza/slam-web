@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/administrative}"
+>
+<head>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Dispositivos</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Local</th>
+                            <th>Equipamento</th>
+                            <th>Identificação</th>
+                            <th class="d-none d-md-none">Data de Ativação</th>
+                            <th>Uptime</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Local</th>
+                            <th>Equipamento</th>
+                            <th>Identificação</th>
+                            <th class="d-none d-md-none" >Data de Ativação</th>
+                            <th>Uptime</th>
+                            <th>Status</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <th:block th:each="device : ${devices}">
+                            <tr th:id="${device.id}">
+                                <td th:text="${device.local}">Sala</td>
+                                <td th:text="${device.device}">TV</td>
+                                <td th:text="${device.token}">7f9030edbd17da5b</td>
+                                <td th:text="${device.registryDate}" class="d-none d-md-none" >26/06/2019</td>
+                                <td th:text="${device.uptime}">10 dias</td>
+                                <td th:id="${ device.token }" th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).ATIVO}" ><button th:attrappend="onclick='toggleStatus(\'' + ${ device.token } + '\')'" style="width: 100%" class="btn btn-success">ativo</button></td>
+                                <td th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).CONFIGURAR}" ><a href="#" data-toggle="modal" data-target="#configModal" style="width: 100%" class="btn btn-warning">configurar</a></td>
+                                <td th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).OFFLINE}" ><span style="width: 100%" class="btn btn-danger">offline</span></td>
+                                <td th:id="${ device.token }" th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).DESATIVADO}" ><button th:attrappend="onclick='toggleStatus(\'' + ${ device.token } + '\')'" style="width: 100%" class="btn btn-primary">desativado</button></td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer small text-muted">Atualizado em 11:59 PM</div>
+    </div>
+
+<!--TODO: verificar pq não esta funcionando-->
+    <!-- Config Modal-->
+    <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="configModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function toggleStatus(token) {
+            $.ajax({
+                url: '/api/v1/devices/'+token,
+                type: 'PATCH',
+                success: function(response) {
+                    if(response === "ATIVO"){
+                        $("#"+token).html('');
+                        $("#"+token).html("<button onclick=\"toggleStatus('" + token + "')\" style=\"width: 100%\" class=\"btn btn-success\">ativo</button>");
+                    }else{
+                        $("#"+token).html('');
+                        $("#"+token).html("<button onclick=\"toggleStatus('" + token + "')\" style=\"width: 100%\" class=\"btn btn-primary\">desativado</button>");
+                    }
+                }
+            });
+        }
+    </script>
+
+</div>
+
+</body>
+</html>
