@@ -30,5 +30,4 @@ public class RegistryApiEndPoint {
         return new ResponseEntity(measure.getId(), HttpStatus.ACCEPTED);
     }
 
-
 }

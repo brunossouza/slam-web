@@ -2,7 +2,9 @@ package dev.valhala.slam.endpoints;
 
 import dev.valhala.slam.enuns.DeviceStatus;
 import dev.valhala.slam.models.Devices;
+import dev.valhala.slam.models.Measures;
 import dev.valhala.slam.repositories.DevicesRepository;
+import dev.valhala.slam.utils.generators.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,17 @@ public class DevicesApiEndPoint {
         devicesRepository.findAll().forEach(devices::add);
 
         return new ResponseEntity(devices,HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/registry")
+    public ResponseEntity registryDevice(@RequestBody String deviceConnected){
+        System.out.println(deviceConnected);
+        Devices device = new Devices();
+        device.setToken(TokenGenerator.create());
+        device.setDevice(deviceConnected);
+        device.setStatus(DeviceStatus.CONFIGURAR);
+        devicesRepository.save(device);
+        return ResponseEntity.ok(device.getToken());
     }
 
     @PatchMapping("/{token}")
