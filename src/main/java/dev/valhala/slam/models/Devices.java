@@ -1,5 +1,6 @@
 package dev.valhala.slam.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.valhala.slam.enuns.DeviceStatus;
 
 import javax.persistence.*;

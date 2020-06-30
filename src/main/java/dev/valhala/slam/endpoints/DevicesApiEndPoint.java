@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/devices")
@@ -29,7 +31,7 @@ public class DevicesApiEndPoint {
         return new ResponseEntity(devices,HttpStatus.OK);
     }
 
-    @PostMapping(value = "/registry")
+    @PostMapping(value = "/registry", produces = "application/json")
     public ResponseEntity registryDevice(@RequestBody String deviceConnected){
         System.out.println(deviceConnected);
         Devices device = new Devices();
@@ -37,7 +39,7 @@ public class DevicesApiEndPoint {
         device.setDevice(deviceConnected);
         device.setStatus(DeviceStatus.CONFIGURAR);
         devicesRepository.save(device);
-        return ResponseEntity.ok(device.getToken());
+        return ResponseEntity.ok(device);
     }
 
     @PatchMapping("/{token}")
