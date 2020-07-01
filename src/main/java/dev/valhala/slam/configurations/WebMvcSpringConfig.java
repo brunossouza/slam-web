@@ -33,11 +33,9 @@ public class WebMvcSpringConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/", "/resources/", "/resource/**");
-//        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
-//        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
-//        registry.addResourceHandler("/scss/**").addResourceLocations("classpath:/static/scss/");
-//        registry.addResourceHandler("/vendor/**").addResourceLocations("classpath:/static/vendor/");
-//        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
     }
 
     @Bean
