@@ -23,11 +23,11 @@ public class RegistryApiEndPoint {
     public ResponseEntity registryMensure(@RequestBody Measures measure, @PathVariable("device_token") String deviceToken){
         Devices device = devicesRepository.findByToken(deviceToken);
         if(device == null){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
         measure.setDevices(device);
         measureRepository.save(measure);
-        return new ResponseEntity(measure.getId(), HttpStatus.ACCEPTED);
+        return ResponseEntity.ok(measure.getId());
     }
 
 }

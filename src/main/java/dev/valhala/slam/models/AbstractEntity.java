@@ -1,25 +1,34 @@
 package dev.valhala.slam.models;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Objects;
-import java.util.TimeZone;
 
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
+    //Data de cadastro do dado
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "registry_date")
-    private Calendar registryDate;
+    @Column(name = "created_at", nullable = false)
+    @CreatedDate
+    private Calendar createdAt;
+
+    //Data de alteração do dado
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "altered_at")
+    @LastModifiedDate
+    private Calendar alteredAt;
 
     public Long getId() {
         return id;
@@ -29,22 +38,32 @@ public class AbstractEntity implements Serializable {
         this.id = id;
     }
 
-    public void setRegistryDate(Calendar registryDate) {
-        this.registryDate = registryDate;
+    public Calendar getCreatedAt() {
+        return createdAt;
     }
 
-    public Calendar getRegistryDate() {
-        return registryDate;
-    }
-
-    public String getDataCadastroString() {
+    public String getCreateAtString() {
+        if(createdAt==null){
+            return "noCreationDate";
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return dateFormat.format(registryDate.getTime());
+        return dateFormat.format(createdAt.getTime());
     }
 
-    @PrePersist
-    public void loadData(){
-        this.registryDate = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.of("America/Sao_Paulo")));
+    public Calendar getAlteredAt() {
+        return alteredAt;
+    }
+
+    public void setAlteredAt(Calendar alterAt) {
+        this.createdAt = alterAt;
+    }
+
+    public String getAlteredAtString() {
+        if(alteredAt==null){
+            return "noAlterDate";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(alteredAt.getTime());
     }
 
     @Override
@@ -52,11 +71,13 @@ public class AbstractEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractEntity that = (AbstractEntity) o;
-        return id.equals(that.id);
+        return id.equals(that.id) &&
+                createdAt.equals(that.createdAt) &&
+                Objects.equals(alteredAt, that.alteredAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id+registryDate.toString());
+        return Objects.hash(id, createdAt, alteredAt);
     }
 }

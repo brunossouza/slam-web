@@ -1,13 +1,13 @@
 package dev.valhala.slam.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.valhala.slam.enuns.DeviceStatus;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.Calendar;
-import java.util.TimeZone;
 
 @Entity(name = "devices")
 public class Devices extends AbstractEntity {
@@ -25,22 +25,17 @@ public class Devices extends AbstractEntity {
     private DeviceStatus status;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="date_last_alter")
-    private Calendar dateLastAlter;
-
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name="date_activation")
     private Calendar dateActivation;
 
     public Devices() {
     }
 
-    public Devices(String local, String device, String token, DeviceStatus status, Calendar dateLastAlter, Calendar dateActivation) {
+    public Devices(String local, String device, String token, DeviceStatus status, Calendar dateActivation) {
         this.local = local;
         this.device = device;
         this.token = token;
         this.status = status;
-        this.dateLastAlter = dateLastAlter;
         this.dateActivation = dateActivation;
     }
 
@@ -76,14 +71,6 @@ public class Devices extends AbstractEntity {
         this.status = status;
     }
 
-    public Calendar getDateLastAlter() {
-        return dateLastAlter;
-    }
-
-    public void setDateLastAlter(Calendar dateLastAlter) {
-        this.dateLastAlter = dateLastAlter;
-    }
-
     public Calendar getDateActivation() {
         return dateActivation;
     }
@@ -109,11 +96,6 @@ public class Devices extends AbstractEntity {
         return dateFormat.format(time.getTime());
     }
 
-    @PreUpdate
-    public void alterData(){
-        this.dateLastAlter = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.of("America/Sao_Paulo")));
-    }
-
     @Override
     public String toString() {
         return "Devices{" +
@@ -122,7 +104,6 @@ public class Devices extends AbstractEntity {
                 ", device='" + device + '\'' +
                 ", token='" + token + '\'' +
                 ", status=" + status +
-                ", dateLastAlter=" + dateLastAlter +
                 ", dateActivation=" + dateActivation +
                 '}';
     }

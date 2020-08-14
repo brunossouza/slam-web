@@ -12,25 +12,25 @@ import java.io.Serializable;
 @JsonDeserialize
 public class Measures extends AbstractEntity implements Serializable {
 
-    @Column(name = "tensao")
-    @JsonProperty("tensao")
-    private double tensao;
+    @Column(name = "voltage")
+    @JsonProperty("voltage")
+    private double voltage;
 
-    @Column(name = "corrente")
-    @JsonProperty("corrente")
-    private double corrente;
+    @Column(name = "current")
+    @JsonProperty("current")
+    private double current;
 
-    @Column(name = "potencia")
-    @JsonProperty("potencia")
-    private double potencia;
+    @Column(name = "power")
+    @JsonProperty("power")
+    private double power;
 
-    @Column(name = "energia")
-    @JsonProperty("energia")
-    private double energia;
+    @Column(name = "energy")
+    @JsonProperty("energy")
+    private double energy;
 
-    @Column(name = "angulo")
-    @JsonProperty("angulo")
-    private double angulo;
+    @Column(name = "angle")
+    @JsonProperty("angle")
+    private double angle;
 
     @ManyToOne
     private Devices devices;
@@ -38,53 +38,53 @@ public class Measures extends AbstractEntity implements Serializable {
     public Measures() {
     }
 
-    public Measures(double tensao, double corrente, double potencia, double energia, double angulo, Devices devices) {
-        this.tensao = tensao;
-        this.corrente = corrente;
-        this.potencia = potencia;
-        this.energia = energia;
-        this.angulo = angulo;
+    public Measures(double voltage, double current, double power, double energy, double angle, Devices devices) {
+        this.voltage = voltage;
+        this.current = current;
+        this.power = power;
+        this.energy = energy;
+        this.angle = angle;
         this.devices = devices;
     }
 
-    public double getTensao() {
-        return tensao;
+    public double getVoltage() {
+        return voltage;
     }
 
-    public void setTensao(double tensao) {
-        this.tensao = tensao;
+    public void setVoltage(double voltage) {
+        this.voltage = voltage;
     }
 
-    public double getCorrente() {
-        return corrente;
+    public double getCurrent() {
+        return current;
     }
 
-    public void setCorrente(double corrente) {
-        this.corrente = corrente;
+    public void setCurrent(double current) {
+        this.current = current;
     }
 
-    public double getPotencia() {
-        return potencia;
+    public double getPower() {
+        return power;
     }
 
-    public void setPotencia(double potencia) {
-        this.potencia = potencia;
+    public void setPower(double power) {
+        this.power = power;
     }
 
-    public double getEnergia() {
-        return energia;
+    public double getEnergy() {
+        return energy;
     }
 
-    public void setEnergia(double energia) {
-        this.energia = energia;
+    public void setEnergy(double energy) {
+        this.energy = energy;
     }
 
-    public double getAngulo() {
-        return angulo;
+    public double getAngle() {
+        return angle;
     }
 
-    public void setAngulo(double angulo) {
-        this.angulo = angulo;
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
 
     public Devices getDevices() {
@@ -97,13 +97,13 @@ public class Measures extends AbstractEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Mensure{" +
-                "tensao=" + tensao +
-                ", corrente=" + corrente +
-                ", potencia=" + potencia +
-                ", energia=" + energia +
-                ", angulo=" + angulo +
-                ", device=" + devices.toString() +
+        return "Measures{" +
+                "voltage=" + voltage +
+                ", current=" + current +
+                ", power=" + power +
+                ", energy=" + energy +
+                ", angle=" + angle +
+                ", devices=" + devices +
                 '}';
     }
 }
