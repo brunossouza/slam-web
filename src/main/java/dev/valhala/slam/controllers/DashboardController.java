@@ -27,7 +27,7 @@ public class DashboardController {
         view.addObject("totalDevices", devicesRepository.count());
         view.addObject("averageCurrent", measureRepository.getMeasuresCurrentAverage());
         view.addObject("averageVoltage", measureRepository.getMeasuresVoltageAverage());
-        //potencia em KW
+        //potência em KW
         view.addObject("averagePower", measureRepository.getMeasuresPowerAverage()/1000);
 
         return view;
