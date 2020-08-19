@@ -26,7 +26,7 @@
             <div class="card text-white bg-warning o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon float-right">
-                        10 A
+                        <span th:text="${#numbers.formatDecimal(averageCurrent, 0, 'COMMA', 2, 'POINT')}" >10</span> A
                     </div>
                     <div class="mr-5">Corrente</div>
                 </div>
@@ -36,7 +36,7 @@
             <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon float-right">
-                        127 V
+                        <span th:text="${#numbers.formatDecimal(averageVoltage, 0, 'COMMA', 2, 'POINT')}" >127</span> V
                     </div>
                     <div class="mr-5">Tensão</div>
                 </div>
@@ -46,7 +46,7 @@
             <div class="card text-white bg-danger o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon float-right">
-                        <span>200 KW</span>
+                        <span th:text="${#numbers.formatDecimal(averagePower, 0, 'COMMA', 2, 'POINT')}" >10</span> KW
                     </div>
                     <div class="mr-5">Potência</div>
                 </div>

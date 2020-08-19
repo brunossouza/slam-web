@@ -1,6 +1,7 @@
 package dev.valhala.slam.controllers;
 
 import dev.valhala.slam.repositories.DevicesRepository;
+import dev.valhala.slam.repositories.MeasureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,18 @@ public class DashboardController {
     @Autowired
     private DevicesRepository devicesRepository;
 
+    @Autowired
+    private MeasureRepository measureRepository;
+
     @GetMapping
     public ModelAndView dashboard(){
         ModelAndView view = new ModelAndView(PATH_PAGE);
 
         view.addObject("totalDevices", devicesRepository.count());
+        view.addObject("averageCurrent", measureRepository.getMeasuresCurrentAverage());
+        view.addObject("averageVoltage", measureRepository.getMeasuresVoltageAverage());
+        //potencia em KW
+        view.addObject("averagePower", measureRepository.getMeasuresPowerAverage()/1000);
 
         return view;
     }

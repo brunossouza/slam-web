@@ -82,10 +82,10 @@ public class Devices extends AbstractEntity {
     //TODO: verificar o calculo do uptime "to fazendo merda"
     public String getUptime(){
         if(dateActivation == null){
-            return "Inativo";
+            return "no activation date";
         }
         if(DeviceStatus.OFFLINE == status || DeviceStatus.DESATIVADO == status){
-            return "Inativo";
+            return DeviceStatus.OFFLINE.name();
         }
         long days =  Calendar.getInstance().getTimeInMillis() - dateActivation.getTimeInMillis() ;
 

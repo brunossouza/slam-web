@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1/devices")
@@ -38,12 +35,13 @@ public class DevicesApiEndPoint {
         device.setToken(TokenGenerator.create());
         device.setDevice(deviceConnected);
         device.setStatus(DeviceStatus.CONFIGURAR);
+        device.setDateActivation(Calendar.getInstance());
         devicesRepository.save(device);
         return ResponseEntity.ok(device);
     }
 
     @PatchMapping("/{token}")
-    private ResponseEntity<String> toggleStateDevice(@PathVariable("token") String token) throws Exception {
+    private ResponseEntity<String> toggleStateDevice(@PathVariable("token") String token){
 
         Devices device = devicesRepository.findByToken(token);
         if (device != null) {

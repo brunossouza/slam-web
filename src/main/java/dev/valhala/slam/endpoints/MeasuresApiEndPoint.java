@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
-public class RegistryApiEndPoint {
+public class MeasuresApiEndPoint {
 
     @Autowired
     private MeasureRepository measureRepository;
     @Autowired
     private DevicesRepository devicesRepository;
 
-    @PostMapping(value = "/{device_token}/mensures", consumes = "application/json")
+    @PostMapping(value = "/{device_token}/measures", consumes = "application/json")
     public ResponseEntity registryMensure(@RequestBody Measures measure, @PathVariable("device_token") String deviceToken){
         Devices device = devicesRepository.findByToken(deviceToken);
         if(device == null){
@@ -27,7 +27,7 @@ public class RegistryApiEndPoint {
         }
         measure.setDevices(device);
         measureRepository.save(measure);
-        return ResponseEntity.ok(measure.getId());
+        return ResponseEntity.ok().build();
     }
 
 }
