@@ -14,7 +14,7 @@
     <!-- Area Chart Example-->
     <div class="card mb-3">
         <div class="card-header">
-            <i class="far fa-question-circle"></i>
+            <i class="fas fa-question-circle"></i>
             Sobre
         </div>
         <div class="card-body">
@@ -35,7 +35,7 @@
                 Sed sit amet imperdiet risus, non posuere sapien. Nunc eu vehicula elit. Mauris in ante ac lacus lobortis condimentum. Fusce pulvinar leo vel tincidunt egestas. Nulla posuere libero feugiat tortor pharetra blandit. Nulla nec velit nibh. Duis et metus massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras sit amet aliquam augue, at volutpat est. Fusce posuere augue quis sapien venenatis tincidunt. Vivamus nec dictum est. Sed finibus justo sem, eu tempus urna aliquam ac. Donec sit amet quam pulvinar, pretium urna eu, placerat arcu. Ut eget luctus metus.
             </p>
         </div>
-        <div class="card-footer small text-muted">Atualizado em 11:59 PM</div>
+        <div class="card-footer small text-muted">Atualizado em <span th:text="${#dates.format(#dates.createNow(),'dd/MM/yyyy HH:mm:ss')}"></span></div>
     </div>
 
 </div>

@@ -62,7 +62,7 @@
         <div class="card-body">
             <canvas id="consumeChart" width="400" height="200"></canvas>
         </div>
-        <div class="card-footer small text-muted">Atualizado em 11:59 PM</div>
+        <div class="card-footer small text-muted">Atualizado em <span th:text="${#dates.format(#dates.createNow(),'dd/MM/yyyy HH:mm:ss')}"></span></div>
     </div>
 
 
@@ -101,6 +101,7 @@
                 }]
             },
             options: {
+                responsive: true,
                 scales: {
                     yAxes: [{
                         ticks: {
