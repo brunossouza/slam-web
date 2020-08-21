@@ -45,7 +45,7 @@
                                 <td th:text="${device.device}">TV</td>
                                 <td th:text="${device.token}">7f9030edbd17da5b</td>
                                 <td th:text="${device.createAtString}" class="d-none d-md-none" >26/06/2019</td>
-                                <td th:text="${device.uptime}">10 dias</td>
+                                <td><span th:text="${device.uptime}">0</span> dias</td>
                                 <td th:id="${ device.token }" th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).ATIVO}" ><button th:attrappend="onclick='toggleStatus(\'' + ${ device.token } + '\')'" style="width: 100%" class="btn btn-success">ativo</button></td>
                                 <td th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).CONFIGURAR}" ><a href="#" data-toggle="modal" data-target="#configModal" style="width: 100%" class="btn btn-warning">configurar</a></td>
                                 <td th:if="${device.status == T(dev.valhala.slam.enuns.DeviceStatus).OFFLINE}" ><span style="width: 100%" class="btn btn-danger">offline</span></td>

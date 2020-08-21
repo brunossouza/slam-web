@@ -7,7 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 @Entity(name = "devices")
 public class Devices extends AbstractEntity {
@@ -87,13 +92,11 @@ public class Devices extends AbstractEntity {
         if(DeviceStatus.OFFLINE == status || DeviceStatus.DESATIVADO == status){
             return DeviceStatus.OFFLINE.name();
         }
-        long days =  Calendar.getInstance().getTimeInMillis() - dateActivation.getTimeInMillis() ;
 
-        Calendar time = Calendar.getInstance();
-        time.setTimeInMillis(days);
+//        ZoneId zid = dateActivation.getTimeZone() == null ? ZoneId.systemDefault() : dateActivation.getTimeZone().toZoneId();
+        LocalDate dateTime = LocalDate.of(dateActivation.get(Calendar.YEAR),dateActivation.get(Calendar.MONTH) + 1 ,dateActivation.get(Calendar.DATE));
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return dateFormat.format(time.getTime());
+        return ChronoUnit.DAYS.between(dateTime,LocalDate.now()).toString();
     }
 
     @Override
