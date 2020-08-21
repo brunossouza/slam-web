@@ -96,7 +96,9 @@ public class Devices extends AbstractEntity {
 //        ZoneId zid = dateActivation.getTimeZone() == null ? ZoneId.systemDefault() : dateActivation.getTimeZone().toZoneId();
         LocalDate dateTime = LocalDate.of(dateActivation.get(Calendar.YEAR),dateActivation.get(Calendar.MONTH) + 1 ,dateActivation.get(Calendar.DATE));
 
-        return ChronoUnit.DAYS.between(dateTime,LocalDate.now()).toString();
+        Long daysActive = ChronoUnit.DAYS.between(dateTime,LocalDate.now());
+
+        return daysActive.toString();
     }
 
     @Override
