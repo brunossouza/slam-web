@@ -6,9 +6,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity(name = "measures")
+@Entity
+@Table(name = "measures")
 @JsonDeserialize
 public class Measures extends AbstractEntity implements Serializable {
 

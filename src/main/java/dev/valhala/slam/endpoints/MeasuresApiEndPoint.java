@@ -10,8 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/measures")
 public class MeasuresApiEndPoint {
 
     @Autowired
@@ -19,7 +23,7 @@ public class MeasuresApiEndPoint {
     @Autowired
     private DevicesRepository devicesRepository;
 
-    @PostMapping(value = "/{device_token}/measures", consumes = "application/json")
+    @PostMapping(value = "/{device_token}", consumes = "application/json")
     public ResponseEntity registryMensure(@RequestBody Measures measure, @PathVariable("device_token") String deviceToken){
         Devices device = devicesRepository.findByToken(deviceToken);
         if(device == null){
@@ -28,6 +32,17 @@ public class MeasuresApiEndPoint {
         measure.setDevices(device);
         measureRepository.save(measure);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity getMonthlyConsuption(){
+
+        Object[][] monthlyConsumption = measureRepository.getMonthlyConsuption();
+        for (int i = 0; i < monthlyConsumption.length; i++) {
+            monthlyConsumption[i][0] = LocalDate.of(LocalDate.now().getYear(),Integer.parseInt(monthlyConsumption[i][0].toString()),LocalDate.now().getDayOfMonth()).getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("pt"));
+        }
+
+        return ResponseEntity.ok(monthlyConsumption);
     }
 
 }

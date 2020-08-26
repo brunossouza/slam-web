@@ -2,10 +2,7 @@ package dev.valhala.slam.models;
 
 import dev.valhala.slam.enuns.DeviceStatus;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +11,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-@Entity(name = "devices")
+@Entity
+@Table(name = "devices")
 public class Devices extends AbstractEntity {
 
     @Column(name="local")

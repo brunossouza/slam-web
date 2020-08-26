@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
 @Controller
 @RequestMapping({"/","/home","/dashboard"})
 public class DashboardController {
@@ -28,8 +34,8 @@ public class DashboardController {
         view.addObject("averageCurrent", measureRepository.getMeasuresCurrentAverage());
         view.addObject("averageVoltage", measureRepository.getMeasuresVoltageAverage());
         //potência em KW
-        view.addObject("averagePower", measureRepository.getMeasuresPowerAverage()/1000);
-
+        Double averagePower = measureRepository.getMeasuresPowerAverage();
+        view.addObject("averagePower", (averagePower != null ? averagePower / 1000 : 0));
         return view;
     }
 
