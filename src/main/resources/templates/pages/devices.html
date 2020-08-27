@@ -64,41 +64,32 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="configModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="configModalLabel">Dispositivo</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
+                <form>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="deviceInput">Equipamento</label>
+                                <input type="text" class="form-control" id="deviceInput" >
+                                <!--                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                            </div>
+                            <div class="form-group">
+                                <label for="localInput">Local</label>
+                                <input type="text" class="form-control" id="localInput" >
+                                <!--                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready( function () {
-            $('#devices-table').DataTable();
-        } );
-
-        function toggleStatus(token) {
-            $.ajax({
-                url: '/api/v1/devices/'+token,
-                type: 'PATCH',
-                success: function(response) {
-                    if(response === "ATIVO"){
-                        $("#"+token).html('');
-                        $("#"+token).html("<button onclick=\"toggleStatus('" + token + "')\" style=\"width: 100%\" class=\"btn btn-success\">ativo</button>");
-                    }else{
-                        $("#"+token).html('');
-                        $("#"+token).html("<button onclick=\"toggleStatus('" + token + "')\" style=\"width: 100%\" class=\"btn btn-primary\">desativado</button>");
-                    }
-                }
-            });
-        }
-    </script>
 
 </div>
 
