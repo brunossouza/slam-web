@@ -55,67 +55,13 @@
     <!-- Area Chart Example-->
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fas fa-chart-area"></i>&nbsp;Consumo Mensal
+            <i class="fas fa-chart-area"></i>&nbsp;Consumo Mensal (KW)
         </div>
         <div class="card-body">
             <canvas id="consumeChart" width="400" height="200"></canvas>
         </div>
         <div class="card-footer small text-muted">Atualizado em <span th:text="${#dates.format(#dates.createNow(),'dd/MM/yyyy HH:mm:ss')}"></span></div>
     </div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script>
-
-        function generateChartsColor( opacity ) {
-            return 'rgba(' + Math.floor(Math.random() * 256) + ', '+ Math.floor(Math.random() * 256) +', '+ Math.floor(Math.random() * 256) +', ' + opacity + ')';
-        }
-
-        const colors = [
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-            generateChartsColor('0.8'),
-        ];
-
-        var ctx = document.getElementById('consumeChart').getContext('2d');
-        var consumeChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Janeiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                datasets: [{
-                    data: [12, 19, 3, 5, 2, 3, 3, 5, 2, 3, 13],
-                    backgroundColor: colors,
-                    borderColor: colors,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                title: {
-                    display: false,
-                },
-                legend: {
-                    display: false,
-                }
-            }
-        });
-    </script>
 
 </div>
 

@@ -1,13 +1,17 @@
 package dev.valhala.slam.beans;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 public class MonthlyConsumptionChart {
 
     private double consumption;
     private String month;
 
-    public MonthlyConsumptionChart(double consumption, String month) {
+    public MonthlyConsumptionChart(String month, double consumption) {
         this.consumption = consumption;
-        this.month = month;
+        this.month = LocalDate.of(LocalDate.now().getYear(),Integer.parseInt(month),LocalDate.now().getDayOfMonth()).getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("pt"));;
     }
 
     public double getConsumption() {

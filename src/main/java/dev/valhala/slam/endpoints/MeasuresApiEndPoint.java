@@ -1,5 +1,6 @@
 package dev.valhala.slam.endpoints;
 
+import dev.valhala.slam.beans.MonthlyConsumptionChart;
 import dev.valhala.slam.models.Devices;
 import dev.valhala.slam.models.Measures;
 import dev.valhala.slam.repositories.DevicesRepository;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 @RestController
@@ -36,13 +39,10 @@ public class MeasuresApiEndPoint {
 
     @GetMapping
     public ResponseEntity getMonthlyConsuption(){
-
-        Object[][] monthlyConsumption = measureRepository.getMonthlyConsuption();
-        for (int i = 0; i < monthlyConsumption.length; i++) {
-            monthlyConsumption[i][0] = LocalDate.of(LocalDate.now().getYear(),Integer.parseInt(monthlyConsumption[i][0].toString()),LocalDate.now().getDayOfMonth()).getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("pt"));
-        }
-
-        return ResponseEntity.ok(monthlyConsumption);
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, -3);
+        List<MonthlyConsumptionChart> consumptionChartList = measureRepository.getMonthlyConsuption(c);
+        return ResponseEntity.ok(consumptionChartList);
     }
 
 }
