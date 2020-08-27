@@ -5,7 +5,7 @@ function generateChartsColor( opacity ) {
 function buildDashboardChart(data){
     let colors = data.map(item => generateChartsColor('0.8'));
     let labels = data.map(item => item.month);
-    let dataSet = data.map(item => item.consumption.toFixed(2));
+    let dataSet = data.map(item => (item.consumption/720).toFixed(2));
 
     let ctx = document.getElementById('consumeChart').getContext('2d');
     let consumeChart = new Chart(ctx, {
