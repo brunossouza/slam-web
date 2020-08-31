@@ -11,7 +11,7 @@ public class MonthlyConsumptionChart {
 
     public MonthlyConsumptionChart(String month, double consumption) {
         this.consumption = consumption;
-        this.month = LocalDate.of(LocalDate.now().getYear(),Integer.parseInt(month),LocalDate.now().getDayOfMonth()).getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("pt"));;
+        this.month = LocalDate.of(LocalDate.now().getYear(),Integer.parseInt(month),01).getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("pt"));
     }
 
     public double getConsumption() {
