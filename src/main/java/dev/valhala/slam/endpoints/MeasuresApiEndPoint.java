@@ -40,6 +40,7 @@ public class MeasuresApiEndPoint {
     @GetMapping
     public ResponseEntity getMonthlyConsuption(){
         Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, -12);
         List<MonthlyConsumptionChart> consumptionChartList = measureRepository.getMonthlyConsuption(c);
         return ResponseEntity.ok(consumptionChartList);
     }
