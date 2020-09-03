@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/administrative}"
+>
+<head>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>Medidas: <span th:text="${device.device}"></span>, Local: <span th:text="${device.local}"></span></div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="devices-table" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Voltagem (V)</th>
+                            <th>Corrente (A)</th>
+                            <th>Potência (KW)</th>
+                            <th>emergia</th>
+                            <th>ângulo</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Voltagem (V)</th>
+                            <th>Corrente (A)</th>
+                            <th>Potência (KW)</th>
+                            <th>emergia</th>
+                            <th>ângulo</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <th:block th:each="measure : ${measuresList}">
+                            <tr>
+                                <td th:text="${measure.createAtString}">Sala</td>
+                                <td th:text="${#numbers.formatDecimal(measure.voltage, 1, 'COMMA', 2, 'POINT')}">TV</td>
+                                <td th:text="${#numbers.formatDecimal(measure.current, 1, 'COMMA', 2, 'POINT')}">7f9030edbd17da5b</td>
+                                <td th:text="${#numbers.formatDecimal((measure.power/1000), 1, 'COMMA', 2, 'POINT')}">26/06/2019</td>
+                                <td th:text="${#numbers.formatDecimal(measure.energy, 1, 'COMMA', 2, 'POINT')}" ></td>
+                                <td th:text="${#numbers.formatDecimal(measure.angle, 1, 'COMMA', 2, 'POINT')}" ></td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer small text-muted">Atualizado em <span th:text="${#dates.format(#dates.createNow(),'dd/MM/yyyy HH:mm:ss')}"></span></div>
+    </div>
+
+</div>
+
+</body>
+</html>

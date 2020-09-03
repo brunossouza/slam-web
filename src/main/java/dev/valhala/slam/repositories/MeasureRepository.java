@@ -1,6 +1,7 @@
 package dev.valhala.slam.repositories;
 
 import dev.valhala.slam.beans.MonthlyConsumptionChart;
+import dev.valhala.slam.models.Devices;
 import dev.valhala.slam.models.Measures;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,6 +16,8 @@ import java.util.Optional;
 
 @Repository
 public interface MeasureRepository extends CrudRepository<Measures, Long> {
+
+    List<Measures> findAllByDevicesOrderByCreatedAtDesc(Devices device);
 
     @Query(value = "SELECT AVG(m.current) FROM Measures m")
     Double getMeasuresCurrentAverage();

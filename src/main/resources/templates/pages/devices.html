@@ -42,7 +42,7 @@
                         <th:block th:each="device : ${devices}">
                             <tr th:id="${device.id}">
                                 <td th:text="${device.local}">Sala</td>
-                                <td th:text="${device.device}">TV</td>
+                                <td><a th:href="'/measures/' + ${device.token}" th:text="${device.device}">TV</a></td>
                                 <td th:text="${device.token}">7f9030edbd17da5b</td>
                                 <td th:text="${device.createAtString}" class="d-none d-md-none" >26/06/2019</td>
                                 <td><span th:text="${device.uptime}">0</span> dias</td>
