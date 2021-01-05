@@ -75,8 +75,8 @@
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>3.0.3</version>
-                <jdkVersion>11</jdkVersion>
                 <configuration>
+                    <jdkVersion>11</jdkVersion>
                     <processTypes>
                         <web> java -Dserver.port=$PORT $JAVA_OPTS -jar target/slam-gui-1.0.0.jar</web>
                     </processTypes>
