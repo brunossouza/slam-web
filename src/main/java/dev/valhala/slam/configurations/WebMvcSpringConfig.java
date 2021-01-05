@@ -15,7 +15,6 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 @EnableJpaAuditing
 public class WebMvcSpringConfig extends WebMvcConfigurationSupport {
 
-    //config
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/", "/resources/", "/resource/**");
