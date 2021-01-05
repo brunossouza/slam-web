@@ -28,6 +28,7 @@ public interface MeasureRepository extends CrudRepository<Measures, Long> {
     @Query(value = "SELECT AVG(m.power) FROM Measures m")
     Double getMeasuresPowerAverage();
 
-    @Query(value = "SELECT NEW dev.valhala.slam.beans.MonthlyConsumptionChart(to_char(m.createdAt, 'MM'), sum(m.power)) FROM Measures m WHERE m.createdAt >= :limit GROUP BY to_char(m.createdAt, 'MM') ORDER BY to_char(m.createdAt, 'MM')")
+    @Query(value = "SELECT NEW dev.valhala.slam.beans.MonthlyConsumptionChart(to_char(m.createdAt, 'MM'), avg(m.power)) FROM Measures m WHERE m.createdAt >= :limit GROUP BY to_char(m.createdAt, 'MM') ORDER BY to_char(m.createdAt, 'MM')")
     List<MonthlyConsumptionChart> getMonthlyConsuption(@Param("limit") Calendar data);
+
 }
