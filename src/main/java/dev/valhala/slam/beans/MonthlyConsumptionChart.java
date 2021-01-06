@@ -10,7 +10,7 @@ public class MonthlyConsumptionChart {
     private String month;
 
     public MonthlyConsumptionChart(String month, double consumption) {
-        this.consumption = consumption;
+        this.consumption = consumption / 3600000;
         this.month = LocalDate.of(LocalDate.now().getYear(),Integer.parseInt(month),01).getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("pt"));
     }
 
