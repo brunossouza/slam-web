@@ -32,7 +32,7 @@ function buildDashboardChart(data){
                 display: false,
             },
             legend: {
-                display: false,
+                display: true,
             }
         }
     });

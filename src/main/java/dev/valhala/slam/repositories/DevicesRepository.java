@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface DevicesRepository extends CrudRepository<Devices, Long> {
     List<Devices> findAllByStatus(DeviceStatus status);
+    List<Devices> findAllByOrderByStatusDesc();
     Devices findByToken(String token);
 }
