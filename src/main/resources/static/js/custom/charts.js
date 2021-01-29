@@ -60,7 +60,7 @@ function buildVoltageChart(){
         data: {
             labels: ["16:49","16:50","16:51","16:52","16:53","16:54","16:55","16:56","16:57","16:58","16:59","17:00","17:01","17:02","17:03","17:04","17:05","17:06","17:07","17:08","17:09","17:10"],
             datasets: [{
-                label: 'voltagem',
+                label: 'tensão',
                 backgroundColor: generateChartsColor('1'),
                 borderColor: generateChartsColor('1'),
                 fill: false,
